@@ -21,14 +21,9 @@ class TopicController extends Controller
     }
     public function create(Request $req){
         $this->validate($req, [
-            'id'=>'required', 
             'tema'=>'required']);
+
         $datos = new Topic;
-        // $datos->topic = $req->topic;
-        //$datos->pass = $req->pass;
-        // $datos->nombre = $req->nombre;
-        // $datos->rol = $req->rol;
-        // $datos->save();
         $result = $datos->fill($req->all())->save();
         if($result)
             return response()->json(['status'=>'success'], 200);
@@ -37,20 +32,20 @@ class TopicController extends Controller
     }
     //topic id 
     //Topic nuevo campo en la tabla
-    public function update(Request $req, $topic){
+    public function update(Request $req, $id){
         $this->validate($req, [
             'tema'=>'filled']);
 
-        $datos = Topic::find($topic);
-        //$datos->pass = $req->pass;
+        $datos = Topic::find($id);
+        if(!$datos)return response()->json(['status'=>'failed'], 404);
         $result = $datos->fill($req->all())->save();
         if($result)
             return response()->json(['status'=>'success'], 200);
         else
             return response()->json(['status'=>'failed'], 404);
     }
-    public function destroy($topic){
-        $datos = Topic::find($topic);
+    public function destroy($id){
+        $datos = Topic::find($id);
         if(!$datos) return response()->json(['status'=>'failed'], 404);
         $result = $datos->delete();
         if($result)

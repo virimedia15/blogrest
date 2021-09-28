@@ -16,10 +16,10 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 //RUTA DE LOGIN
-//$router->get('/login/{user}/{pass}', 'AuthController@login');
+$router->get('/login/{user}/{pass}', 'AuthController@login');
 
 //PROTEGER LA URL
-//$router->group(['middleware'=>['auth']], function() use($router){
+$router->group(['middleware'=>['auth']], function() use($router){
 
 //FUNCIONES PARA USUARIOS
 $router->get('/usuarios', 'UserController@index');
@@ -37,10 +37,10 @@ $router->delete('/topico/{topic}', 'TopicController@destroy');
 
 //FUNCIONES PARA Posts
 $router->get('/post', 'PostController@index');
-$router->get('/post/{post}', 'PostController@get');
+$router->get('/post/{id}', 'PostController@get');
 $router->post('/´post', 'PostController@create');
-$router->put('/post/{post}', 'PostController@update');
-$router->delete('/post/{post}', 'PostController@destroy');
-//}
-//);
+$router->put('/post/{id}', 'PostController@update');
+$router->delete('/post/{id}', 'PostController@destroy');
+}
+);
 
