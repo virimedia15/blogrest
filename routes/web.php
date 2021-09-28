@@ -19,7 +19,7 @@ $router->get('/', function () use ($router) {
 $router->get('/login/{user}/{pass}', 'AuthController@login');
 
 //PROTEGER LA URL
-$router->group(['middleware'=>['auth']], function() use($router){
+$router->group(['middleware'=>['auth','cors']], function() use($router){
 
 //FUNCIONES PARA USUARIOS
 $router->get('/usuarios', 'UserController@index');
